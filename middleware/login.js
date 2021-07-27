@@ -1,5 +1,5 @@
 const login = (req, res, next) => {
   console.log('Logeando usuario...')
-  if (req.body.nombre) next()
+  next()
 }
 module.exports = login
