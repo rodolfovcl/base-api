@@ -48,7 +48,10 @@ const consultarUsuario = (req, res= response) => {
 const agregarUsuario = (req, res = response) => {
     if (!req.body.nombre){
       // 400 bad request
-      res.status(400).send('Debe ingresar un nombre')
+      res.status(400).json({
+        error: true,
+        msg: 'Debe ingresar un nombre'
+      })
       return
     }
     const nuevoUsuario = {
