@@ -9,30 +9,40 @@ let arrayUsuarios = [
 
 
 const getUsuarios = (req, res = response) => {
+  const params = req.params
+  const query = req.query
   res.json({
     error: false,
-    msg: 'getUsuarios - controllers'
+    msg: 'getUsuarios - controllers',
+    params,
+    query
   })
 }
 
 const postUsuarios = (req, res = response) => {
+  console.log('req.body: ', req.body)
   res.json({
     error: false,
-    msg: 'postUsuarios - controllers'
+    msg: 'postUsuarios - controllers',
+    nombre: req.body.nombre
   })
 }
 
 const putUsuarios = (req, res = response) => {
+  // console.log('req.body: ', req.body)
   res.json({
     error: false,
-    msg: 'putUsuarios - controllers'
+    msg: 'putUsuarios - controllers',
+    nombre: req.body.nombre
   })
 }
 
 const deleteUsuarios = (req, res = response) => {
+  const body = req.body
   res.json({
     error: false,
-    msg: 'deleteUsuarios - controllers'
+    msg: 'deleteUsuarios - controllers',
+    body
   })
 }
 
@@ -47,8 +57,7 @@ const consultarUsuario = (req, res= response) => {
 
 const agregarUsuario = (req, res = response) => {
     if (!req.body.nombre){
-      // 400 bad request
-      res.status(400).json({
+      res.status(400).json({ // 400 bad request
         error: true,
         msg: 'Debe ingresar un nombre'
       })

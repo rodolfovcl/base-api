@@ -9,9 +9,7 @@ route.get('/', usuarios.getUsuarios)
 route.post('/', usuarios.postUsuarios)
 route.put('/', usuarios.putUsuarios)
 route.delete('/', usuarios.deleteUsuarios)
-// Consulta usuario por id
 route.get('/consultarUsuario/:id', usuarios.consultarUsuario)
-// Nuevo usuario
 route.post('/agregarUsuario', usuarios.agregarUsuario)
 
 

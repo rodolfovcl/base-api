@@ -11,7 +11,7 @@ const port = process.env.PORT || 4005
 
 //? MIDDLEWARES
 // Uso de mddleware propios de Express
-app.use(express.json()) // hace que express tome el body del request para que venga en formato json
+app.use(express.json()) // Lectura y parseo del body
 app.use(express.urlencoded({extended: true})) // para que lea los parametros recibidos en JSON
 
 // Uso de moddlewere de Terceros (npm)
