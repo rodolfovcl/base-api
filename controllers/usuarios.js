@@ -1,4 +1,7 @@
 const { response } = require('express')
+const Usuario = require('../models/usuario')
+const bcryptjs = require('bcryptjs')
+const {validationResult} = require("express-validator");
 
 // Ejemplo de BD
 let arrayUsuarios = [
@@ -19,12 +22,29 @@ const getUsuarios = (req, res = response) => {
   })
 }
 
-const postUsuarios = (req, res = response) => {
-  console.log('req.body: ', req.body)
+const postUsuarios = async (req, res = response) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json(errors)
+  }
+
+  const { nombre, correo, contrasenia, rol } = req.body
+  const usuario = new Usuario({nombre, correo, contrasenia, rol})
+
+  // Verificar si correo existe
+  const existeCorreo = await Usuario.findOne({correo})
+  if (existeCorreo) {
+    return res.status(400).json({mns: "El correo ya esta registrado"})
+  }
+
+  // Encriptar contraseña
+  const salt = bcryptjs.genSaltSync()
+  usuario.contrasenia = bcryptjs.hashSync(contrasenia, salt)
+  // Guardar en BD
+  await usuario.save()
   res.json({
-    error: false,
     msg: 'postUsuarios - controllers',
-    nombre: req.body.nombre
+    usuario
   })
 }
 

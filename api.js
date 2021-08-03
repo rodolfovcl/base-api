@@ -5,8 +5,17 @@ const cors = require('cors')
 const usuarios = require('./routes/usuarios')
 const login = require('./middleware/login')
 const autenticated = require('./middleware/auntenticated')
+const { dbConnection } = require('./database/config')
 require('dotenv').config()
 const port = process.env.PORT || 4005
+
+// conectar a bd
+const conectarDB = async () => {
+  await dbConnection()
+}
+
+conectarDB()
+
 
 
 //? MIDDLEWARES
